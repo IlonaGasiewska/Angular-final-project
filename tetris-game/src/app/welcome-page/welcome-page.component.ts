@@ -9,13 +9,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './welcome-page.component.scss'
 })
 export class WelcomePageComponent {
-  name= "";
+  name = "";
   title = 'ngTETRIS GAME';
   email = "";
   isButtonDisabled = true;
   errorMessage = "";
-  
-  checkInputs() {
+  emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
+  checkInputs() {
+    this.isButtonDisabled = !(this.name && this.email);
+    if (this.name === "" && this.email === "") {
+      this.errorMessage = "Name and email are required";
+    } else if (this.name === "") {
+      this.errorMessage = "Name is required";
+    } else if (this.email === "") {
+      this.errorMessage = "Email is required";
+    } else if (!this.emailPattern.test(this.email)) {
+      this.errorMessage = "Email is invalid";
+    } else {
+      this.errorMessage = "";
+    }
   }
 }
