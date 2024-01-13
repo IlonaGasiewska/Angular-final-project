@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TetrisPanelComponent } from './tetris-panel/tetris-panel.component';
 import { GamePageComponent } from './game-page/game-page.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,10 @@ import { GamePageComponent } from './game-page/game-page.component';
   imports: [
     CommonModule,
     GamePageComponent,
+    WelcomePageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'tetris-game';
 }

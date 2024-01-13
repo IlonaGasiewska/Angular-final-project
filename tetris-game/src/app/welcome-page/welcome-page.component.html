@@ -1,0 +1,11 @@
+<div class="start-page">
+    <h1>{{title}}</h1>
+    <form>
+      <img src="../favicon.ico" alt="tetris icon">
+      <input id="name" type="text" [(ngModel)]="name" placeholder="Your name" (input)="checkInputs()">
+      <input type="email" [(ngModel)]="email" placeholder="Your email" (input)="checkInputs()">
+      <p>{{errorMessage}}</p>
+      <input type="button" value="START" [disabled]="isButtonDisabled">
+    </form>
+  </div>
+  
