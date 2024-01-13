@@ -11,5 +11,7 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 
 
 export class TetrisPanelComponent {
-
+  onLineCleared() {
+    
+  }
 }
