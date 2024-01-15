@@ -1,2 +1,2 @@
-<app-welcome-page></app-welcome-page>
-<!-- <app-game-page></app-game-page> -->
+<app-welcome-page (userDataSubmitted)="handleUserData($event)"></app-welcome-page>
+<app-game-page [userName]="user.name"></app-game-page>

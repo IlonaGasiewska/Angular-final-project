@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TetrisPanelComponent } from '../tetris-panel/tetris-panel.component';
 import { ScoreDisplayComponent } from '../score-display/score-display.component';
 
@@ -13,5 +13,5 @@ import { ScoreDisplayComponent } from '../score-display/score-display.component'
   styleUrl: './game-page.component.scss'
 })
 export class GamePageComponent {
-
+  @Input() userName: string = '';
 }

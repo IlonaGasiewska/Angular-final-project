@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,7 @@ export class WelcomePageComponent {
   errorMessage = "";
   emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
-  checkInputs() {
+  checkInputs () {
     this.isButtonDisabled = !(this.name && this.email);
     if (this.name === "" && this.email === "") {
       this.errorMessage = "Name and email are required";
@@ -30,4 +30,13 @@ export class WelcomePageComponent {
       this.errorMessage = "";
     }
   }
+
+  @Output() userDataSubmitted: EventEmitter<{ name: string, email: string }> = new EventEmitter();
+
+  submit() {
+    if (this.name && this.email) {
+      this.userDataSubmitted.emit({ name: this.name, email: this.email });
+    }
+  }
+
 }

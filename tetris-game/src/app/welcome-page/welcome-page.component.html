@@ -5,7 +5,7 @@
       <input name="name" type="text" [(ngModel)]="name" placeholder="Your name" (input)="checkInputs()">
       <input name="email" [(ngModel)]="email" placeholder="Your email" (input)="checkInputs()">
       <p>{{errorMessage}}</p>
-      <input type="button" value="START" [disabled]="isButtonDisabled">
+      <input type="button" value="START" (click)="submit()" [disabled]="isButtonDisabled">
     </form>
   </div>
   
