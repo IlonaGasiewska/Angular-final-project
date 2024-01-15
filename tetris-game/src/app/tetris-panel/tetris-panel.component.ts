@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule,  Output, EventEmitter } from '@angular/core';
 import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 
 @Component({
@@ -9,9 +9,14 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
   styleUrl: './tetris-panel.component.scss'
 })
 
-
 export class TetrisPanelComponent {
+
+  @Output() lineCleared = new EventEmitter<number>();
+
+  score = 0;
+
   onLineCleared() {
-    
+    this.score += 10;
+    this.lineCleared.emit(this.score);
   }
 }

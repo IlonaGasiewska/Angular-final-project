@@ -14,4 +14,10 @@ import { ScoreDisplayComponent } from '../score-display/score-display.component'
 })
 export class GamePageComponent {
   @Input() userName: string = '';
+
+  score: number = 0;
+
+  onLineCleared(score: number) {
+    this.score = score;
+  }
 }
