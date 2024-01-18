@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -39,4 +39,10 @@ export class WelcomePageComponent {
     }
   }
 
+  @Input() welcomePageShouldBeVisible: boolean = true;
+  @Output() pageChange = new EventEmitter<void>();
+
+  changePage() {
+    this.pageChange.emit();
+  }
 }

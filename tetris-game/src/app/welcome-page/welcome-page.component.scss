@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Roboto&family=Rubik+Doodle+Shadow&display=swap');
+
+.start-page {
+     background-color: #FFF;
+     width: 60%;
+     min-width: 350px;
+     max-width: 700px;
+     margin: auto;
+     text-align: center;
+     padding: 50px;
+     border-radius: 20px;
+     h1 {
+        font-size: 60px;
+        font-family: Rubik Doodle Shadow;
+     }
+     form {
+        width: 50%;
+        text-align: center;
+        margin: auto;
+        input {
+            width: 80%;
+            padding: 10px 0px 10px 15px;
+            font-size: 20px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        input[type="button"] {
+            background-color: #A7D397;
+            cursor: pointer;
+            border: none;
+            width: 70%;
+            font-weight: 550;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+        .error-message {
+            color: #FF004D;
+        }
+        img {
+            width: 100px;
+            margin: 30px 0px;
+        }
+     }
+}

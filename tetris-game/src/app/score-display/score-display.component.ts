@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './score-display.component.scss'
 })
 export class ScoreDisplayComponent {
-   @Input() userName: string = '';
-  time = 0;
+  @Input() userName: string = '';
+  @Input() time = 0;
   @Input() score: number = 0;
 }

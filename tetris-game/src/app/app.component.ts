@@ -16,12 +16,15 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 })
 export class AppComponent {
 
+  welcomePageShouldbeVivible = true!;
   userName = "";
-
   user = { name: '', email: '' };
 
   handleUserData(userData: { name: string, email: string }) {
     this.user = userData;
-    // Tutaj możesz przetworzyć dane, wysłać je na serwer, etc.
+  }
+
+  changePage() {
+    this.welcomePageShouldbeVivible = !this.welcomePageShouldbeVivible;
   }
 }
