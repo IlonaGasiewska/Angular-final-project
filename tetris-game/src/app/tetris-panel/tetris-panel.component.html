@@ -1,11 +1,11 @@
 <tetris-core #game
 (lineCleared)="onLineCleared()"></tetris-core>
 
-<button (click)="game.actionStart()" (click)="timerStart()">Start</button>
-<button (click)="game.actionStop()" (click)="timerStop()">Stop</button>
-<button (click)="game.actionReset()" (click)="timerReset()">Reset</button>
-<button (click)="game.actionRotate()">Rotate</button>
-<button (click)="game.actionLeft()">Left</button>
-<button (click)="game.actionRight()">Right</button>
-<button (click)="game.actionDown()">Down</button>
-<button (click)="game.actionDrop()">Drop</button>
+<button (click)="game.actionStart()" (click)="timerStart()"><i class="fa-solid fa-play"></i></button>
+<button (click)="game.actionStop()" (click)="timerStop()"><i class="fa-solid fa-pause"></i></button>
+<button (click)="game.actionReset()" (click)="timerReset()"><i class="fa-solid fa-rotate-right"></i></button>
+<button (click)="game.actionRotate()"><i class="fa-solid fa-arrows-spin"></i></button>
+<button (click)="game.actionLeft()"><i class="fa-solid fa-square-caret-left"></i></button>
+<button (click)="game.actionRight()"><i class="fa-solid fa-square-caret-right"></i></button>
+<button (click)="game.actionDown()"><i class="fa-solid fa-square-caret-down"></i></button>
+<button (click)="game.actionDrop()"><i class="fa-solid fa-down-long"></i></button>

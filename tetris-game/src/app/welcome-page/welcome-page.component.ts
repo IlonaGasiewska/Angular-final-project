@@ -39,7 +39,7 @@ export class WelcomePageComponent {
     }
   }
 
-  @Input() welcomePageShouldBeVisible: boolean = true;
+  @Input() welcomePageShouldBeVisible: boolean = false;
   @Output() pageChange = new EventEmitter<void>();
 
   changePage() {
