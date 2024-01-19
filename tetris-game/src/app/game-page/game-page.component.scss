@@ -3,14 +3,13 @@
     display: flex;
     justify-content: center;
     margin: auto;
-    width: fit-content;
-    max-width: 800px;
+    width:900px;
     padding: 50px 70px;
     gap: 55px;
     border-radius: 10px;
     text-align: center;
     app-score-display {
-        width: 50%;
+        width: 40%;
     }
     .btn-back-to-menu{
         height: fit-content;

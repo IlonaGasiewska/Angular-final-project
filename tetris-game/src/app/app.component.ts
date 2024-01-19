@@ -16,7 +16,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 })
 export class AppComponent {
 
-  welcomePageShouldbeVivible = false!;
+  welcomePageShouldbeVivible = true!;
   userName = "";
   user = { name: '', email: '' };
 
