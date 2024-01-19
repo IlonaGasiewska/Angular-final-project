@@ -1,5 +1,11 @@
 <div class="game-page">
-    <app-score-display [userName]="userName" [score]="score" [time]="time"></app-score-display>
-    <app-tetris-panel (lineCleared)="onLineCleared($event)" (updateTime)="updateTime($event)"></app-tetris-panel>
-    <button class="btn-back-to-menu" (click)="changePage()"><i class="fa-regular fa-circle-right"></i></button>
-</div>
+    <app-score-display
+      [userName]="userName"
+      [score]="score"
+      [seconds]="time.seconds"
+      [minutes]="time.minutes"
+      [hours]="time.hours"
+    ></app-score-display>
+    <app-tetris-panel (lineCleared)="onLineCleared($event)" (updateTimer)="updateTime($event)"></app-tetris-panel>
+    <button class="btn-back-to-menu" (click)="changePage()">MENU</button>
+  </div>

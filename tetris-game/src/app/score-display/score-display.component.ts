@@ -9,6 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ScoreDisplayComponent {
   @Input() userName: string = '';
-  @Input() time = 0;
+  @Input() seconds: number = 0;
+  @Input() minutes: number = 0;
+  @Input() hours: number = 0;
   @Input() score: number = 0;
 }

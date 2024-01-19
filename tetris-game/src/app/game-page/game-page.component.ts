@@ -15,9 +15,9 @@ import { ScoreDisplayComponent } from '../score-display/score-display.component'
 export class GamePageComponent {
   @Input() userName: string = '';
   score: number = 0;
-  time: number = 0; 
+  time: { seconds: number; minutes: number; hours: number } = { seconds: 0, minutes: 0, hours: 0 };
 
-  updateTime(time: number) {
+  updateTime(time: { seconds: number; minutes: number; hours: number }) {
     this.time = time;
   }
 

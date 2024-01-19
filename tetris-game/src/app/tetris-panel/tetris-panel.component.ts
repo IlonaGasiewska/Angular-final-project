@@ -1,4 +1,4 @@
-import { Component, NgModule, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 
 @Component({
@@ -8,48 +8,61 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
   templateUrl: './tetris-panel.component.html',
   styleUrl: './tetris-panel.component.scss'
 })
-
 export class TetrisPanelComponent {
+  @Output() lineCleared = new EventEmitter<number>();
+  @Output() updateTimer = new EventEmitter<{ seconds: number, minutes: number, hours: number }>();
 
-@Output() lineCleared = new EventEmitter<number>();
-@Output() updateTime = new EventEmitter<number>();
+  score = 0;
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+  isTimerRunning = false;
+  timerIntervalId: any;
 
-score = 0;
-time = 0;
-isTimerRunning = false;
-timerIntervalId: any;
-
-timerStart() {
-  if (!this.isTimerRunning) {
-    this.timerIntervalId = setInterval(() => {
-      this.time += 1;
-      this.updateTime.emit(this.time);
-    }, 1000);
-    this.isTimerRunning = true;
+  timerStart() {
+    if (!this.isTimerRunning) {
+      this.timerIntervalId = setInterval(() => {
+        this.seconds += 1;
+        if (this.seconds === 60) {
+          this.seconds = 0;
+          this.minutes += 1;
+        }
+        if (this.minutes === 60) {
+          this.minutes = 0;
+          this.hours += 1;
+        }
+        this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
+      }, 1000);
+      this.isTimerRunning = true;
+    }
   }
-}
 
-timerStop() {
-  if (this.isTimerRunning) {
+  timerStop() {
+    if (this.isTimerRunning) {
+      clearInterval(this.timerIntervalId);
+      this.isTimerRunning = false;
+    }
+  }
+
+  timerReset() {
     clearInterval(this.timerIntervalId);
-    this.isTimerRunning = false;
+    this.seconds = 0;
+    this.minutes = 0;
+    this.hours = 0;
+    this.score = 0;
+    if (!this.isTimerRunning) {
+      clearInterval(this.timerIntervalId);
+      this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
+      this.lineCleared.emit(this.score);
+    } else {
+      this.isTimerRunning = false;
+      this.timerStart();
+      this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
+      this.lineCleared.emit(this.score);
+    }
   }
-}
 
-timerReset() {
-  clearInterval(this.timerIntervalId);
-  this.time = 0;
-  if(!this.isTimerRunning){
-    clearInterval(this.timerIntervalId);
-    this.updateTime.emit(this.time);
-  } else {
-    this.isTimerRunning= false;
-    this.timerStart();
-    this.updateTime.emit(this.time);
-  }
-}
-
-onLineCleared() {
+  onLineCleared() {
     this.score += 10;
     this.lineCleared.emit(this.score);
   }
