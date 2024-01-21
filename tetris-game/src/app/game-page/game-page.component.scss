@@ -5,11 +5,13 @@
     width: fit-content;
     background-color: white;
     display: grid;
-    grid-template-columns: 300px 600px;
+    grid-template-columns: 1fr 2fr;
     grid-template-areas: 
     "score-display tetris"
     "user-action-history tetris"
-    "user-action-history tetris";
+    "user-action-history tetris"
+    "btn btn"
+    ;
     app-tetris-panel{
         grid-area: tetris;
         border-top: 20px;
@@ -44,14 +46,18 @@
         border-radius: 0px 0px 0px 20px;
         padding: 30px;
     }
+    .btn-back-to-menu {
+        height: fit-content;
+        align-self: end;
+        font-size: 17px;
+        border: none;
+        background-color: transparent;
+        font-family: "Press Start 2P";
+        cursor: pointer;
+        margin-left: auto;
+        grid-area: btn;
+        align-self: end;
+        margin-top: 50px;
+    }
 }
 
-.btn-back-to-menu{
-    height: fit-content;
-    align-self: end;
-    font-size: 17px;
-    border: none;
-    background-color:transparent;
-    font-family: "Press Start 2P";
-    cursor: pointer;
-}
