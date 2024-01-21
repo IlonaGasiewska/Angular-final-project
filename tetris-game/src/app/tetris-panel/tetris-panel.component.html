@@ -1,5 +1,5 @@
 <tetris-core #game
-(lineCleared)="onLineCleared()"></tetris-core>
+(lineCleared)="onLineCleared()" (gameOver)="onGameOver()"></tetris-core>
 
 <button (click)="game.actionStart()" (click)="timerStart()" (click)="handleButtonClick('Start Game')"><i class="fa-solid fa-play"></i></button>
 <button (click)="handleButtonClick('Pause')" (click)="game.actionStop()" (click)="timerStop()"><i class="fa-solid fa-pause"></i></button>

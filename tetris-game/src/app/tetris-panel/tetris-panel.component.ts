@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 
 @Component({
@@ -11,6 +11,12 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 export class TetrisPanelComponent {
   @Output() lineCleared = new EventEmitter<number>();
   @Output() updateTimer = new EventEmitter<{ seconds: number, minutes: number, hours: number }>();
+  @Input() welcomePageShouldBeVisible: boolean = false;
+  @Output() pageChange = new EventEmitter<void>();
+
+  changePage() {
+    this.pageChange.emit();
+  }
 
   score = 0;
   seconds = 0;
@@ -78,4 +84,10 @@ export class TetrisPanelComponent {
       this.actionClicked.emit(action);
     }
   }
+
+  onGameOver() {
+    alert('game over');
+    this.changePage()
+}
+
 }
