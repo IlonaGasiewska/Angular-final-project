@@ -33,4 +33,14 @@ export class GamePageComponent {
   changePage() {
     this.pageChange.emit();
   }
+
+  userActions: { action: string; time: { seconds: number; minutes: number; hours: number } }[] = [];
+
+  handleActionClicked(action: string): void {
+    if (action === 'Reset') {
+      this.userActions = [];
+    } else {
+      this.userActions.push({ action: action, time: this.time });
+    }
+  }
 }

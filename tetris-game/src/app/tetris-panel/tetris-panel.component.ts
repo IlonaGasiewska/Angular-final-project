@@ -54,6 +54,7 @@ export class TetrisPanelComponent {
       clearInterval(this.timerIntervalId);
       this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
       this.lineCleared.emit(this.score);
+
     } else {
       this.isTimerRunning = false;
       this.timerStart();
@@ -65,5 +66,15 @@ export class TetrisPanelComponent {
   onLineCleared() {
     this.score += 10;
     this.lineCleared.emit(this.score);
+  }
+
+  @Output() actionClicked = new EventEmitter<string>();
+
+  handleButtonClick(action: string): void {
+    if (action != "Reset"){
+      this.isTimerRunning === true && this.actionClicked.emit(action);
+    } else {
+      this.actionClicked.emit(action);
+    }
   }
 }

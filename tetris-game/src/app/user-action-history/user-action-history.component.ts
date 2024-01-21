@@ -1,5 +1,5 @@
 import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,15 +10,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-action-history.component.scss'
 })
 export class UserActionHistoryComponent {
-  gameHistory = ["start game", "start game", "button left", "button right" ,"pause", "pause","rotate", "down", "drop", "start game", "start game", "button left", "button right" ,"pause", "pause","rotate", "down", "drop"];
+  @Input() actions: { action: string; time: { seconds: number; minutes: number; hours: number } }[] = [];
   
-  selectedAction: string = "all";
+  selectedAction: string = "All";
 
-  get filteredGameHistory() {
-    if (this.selectedAction === "all") {
-      return this.gameHistory;
+  get filteredActions() {
+    if (this.selectedAction === "All") {
+      return this.actions;
     } else {
-      return this.gameHistory.filter((e) => e.includes(this.selectedAction));
+      return this.actions.filter((e) => e.action.includes(this.selectedAction));
     }
   }
 }

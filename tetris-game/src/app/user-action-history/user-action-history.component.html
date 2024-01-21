@@ -2,16 +2,19 @@
 <form>
   <label for="actions">Show actions: </label>
   <select id="actions" name="actions" [(ngModel)]="selectedAction">
-    <option value="all">all</option>
-    <option value="button left">button left</option>
-    <option value="button right">button right</option>
-    <option value="rotate">rotate</option>
-    <option value="down">down</option>
-    <option value="drop">drop</option>
-    <option value="pause">pause</option>
-    <option value="start">start</option>
+    <option value="All">All</option>
+    <option value="Button Left">Button Left</option>
+    <option value="Button Right">Button Right</option>
+    <option value="Rotate">Rotate</option>
+    <option value="Down">Down</option>
+    <option value="Drop">Drop</option>
+    <option value="Pause">Pause</option>
+    <option value="Start">Start</option>
   </select>
 </form>
 <ul>
-  <li *ngFor="let action of filteredGameHistory">{{ action }}</li>
+  <li *ngFor="let action of filteredActions">
+    <p>{{ action.action }}</p>
+    <p class="action-time">{{action.time.hours + "H " + action.time.minutes + "M " + action.time.seconds + "S"}}</p>
+  </li>
 </ul>
