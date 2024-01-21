@@ -1,23 +1,51 @@
+// .game-page {
+//     background-color: white;
+//     display: flex;
+//     justify-content: center;
+//     margin: auto;
+//     width:900px;
+//     padding: 50px 70px;
+//     gap: 55px;
+//     border-radius: 10px;
+//     text-align: center;
+//     app-score-display {
+//         width: 40%;
+//     }
+//     .btn-back-to-menu{
+//         height: fit-content;
+//         align-self: end;
+//         font-size: 17px;
+//         border: none;
+//         background-color: #FFF;
+//         font-family: "Press Start 2P";
+//         cursor: pointer;
+//     }
+// }
+
+
 .game-page {
     background-color: white;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width:900px;
-    padding: 50px 70px;
-    gap: 55px;
-    border-radius: 10px;
-    text-align: center;
+    display: grid;
+    grid-template-areas: 
+    "score-display tetris"
+    "user-action-history tetris";
+    app-tetris-panel{
+        grid-area: tetris;
+    }
     app-score-display {
-        width: 40%;
+        grid-area: score-display;
     }
-    .btn-back-to-menu{
-        height: fit-content;
-        align-self: end;
-        font-size: 17px;
-        border: none;
-        background-color: #FFF;
-        font-family: "Press Start 2P";
-        cursor: pointer;
+    app-user-action-history {
+        grid-area: user-action-history;
     }
+}
+
+.btn-back-to-menu{
+    height: fit-content;
+    align-self: end;
+    font-size: 17px;
+    border: none;
+    background-color:transparent;
+    font-family: "Press Start 2P";
+    cursor: pointer;
 }

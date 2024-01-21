@@ -7,5 +7,6 @@
       [hours]="time.hours"
     ></app-score-display>
     <app-tetris-panel (lineCleared)="onLineCleared($event)" (updateTimer)="updateTime($event)"></app-tetris-panel>
-    <button class="btn-back-to-menu" (click)="changePage()">MENU</button>
+    <app-user-action-history></app-user-action-history>
   </div>
+  <button class="btn-back-to-menu" (click)="changePage()">MENU</button>

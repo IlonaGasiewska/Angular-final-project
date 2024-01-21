@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TetrisPanelComponent } from '../tetris-panel/tetris-panel.component';
 import { ScoreDisplayComponent } from '../score-display/score-display.component';
+import { UserActionHistoryComponent } from '../user-action-history/user-action-history.component';
 
 @Component({
   selector: 'app-game-page',
@@ -8,6 +9,7 @@ import { ScoreDisplayComponent } from '../score-display/score-display.component'
   imports: [
     TetrisPanelComponent,
     ScoreDisplayComponent,
+    UserActionHistoryComponent
   ],
   templateUrl: './game-page.component.html',
   styleUrl: './game-page.component.scss'
