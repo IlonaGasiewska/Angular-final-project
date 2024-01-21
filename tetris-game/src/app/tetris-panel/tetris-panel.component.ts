@@ -87,7 +87,7 @@ export class TetrisPanelComponent {
 
   onGameOver() {
     alert('game over');
-    this.changePage()
+    this.timerStop();
 }
 
 }

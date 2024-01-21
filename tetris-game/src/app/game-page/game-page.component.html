@@ -6,8 +6,7 @@
       [minutes]="time.minutes"
       [hours]="time.hours"
     ></app-score-display>
-    <app-tetris-panel [welcomePageShouldBeVisible]="welcomePageShouldbeVivible"
-    (pageChange)="changePage()" (actionClicked)="handleActionClicked($event)" (lineCleared)="onLineCleared($event)" (updateTimer)="updateTime($event)"></app-tetris-panel>
+    <app-tetris-panel (actionClicked)="handleActionClicked($event)" (lineCleared)="onLineCleared($event)" (updateTimer)="updateTime($event)"></app-tetris-panel>
     <app-user-action-history  [actions]="userActions"></app-user-action-history>
     <button class="btn-back-to-menu" (click)="changePage()">MENU</button>
   </div>

@@ -18,7 +18,6 @@ export class GamePageComponent {
   @Input() userName: string = '';
   score: number = 0;
   time: { seconds: number; minutes: number; hours: number } = { seconds: 0, minutes: 0, hours: 0 };
-  welcomePageShouldbeVivible = false;
 
   updateTime(time: { seconds: number; minutes: number; hours: number }) {
     this.time = time;
