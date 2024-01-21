@@ -11,14 +11,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserActionHistoryComponent {
   @Input() actions: { action: string; time: { seconds: number; minutes: number; hours: number } }[] = [];
-  
   selectedAction: string = "All";
+  selectedSorting: string = "First"
 
   get filteredActions() {
-    if (this.selectedAction === "All") {
-      return this.actions;
+    let filtered = this.actions;
+  
+    if (this.selectedAction !== "All") {
+      filtered = filtered.filter((e) => e.action.includes(this.selectedAction));
+    }
+  
+    if (this.selectedSorting !== "First") {
+      return filtered.slice().reverse(); 
     } else {
-      return this.actions.filter((e) => e.action.includes(this.selectedAction));
+      return filtered;
     }
   }
 }
