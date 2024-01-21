@@ -1,42 +1,48 @@
-// .game-page {
-//     background-color: white;
-//     display: flex;
-//     justify-content: center;
-//     margin: auto;
-//     width:900px;
-//     padding: 50px 70px;
-//     gap: 55px;
-//     border-radius: 10px;
-//     text-align: center;
-//     app-score-display {
-//         width: 40%;
-//     }
-//     .btn-back-to-menu{
-//         height: fit-content;
-//         align-self: end;
-//         font-size: 17px;
-//         border: none;
-//         background-color: #FFF;
-//         font-family: "Press Start 2P";
-//         cursor: pointer;
-//     }
-// }
-
-
 .game-page {
+    padding: 30px 50px;
+    border-radius: 20px;
+    margin: auto;
+    width: fit-content;
     background-color: white;
     display: grid;
+    grid-template-columns: 300px 600px;
     grid-template-areas: 
     "score-display tetris"
+    "user-action-history tetris"
     "user-action-history tetris";
     app-tetris-panel{
         grid-area: tetris;
+        border-top: 20px;
+        border-right: 20px;
+        border-bottom: 20px;
+        border-left: 10px;
+        border-style: solid;
+        border-color: #053B50;
+        text-align: center;
+        padding: 30px;
+        border-radius: 0px 20px 20px 0px;
     }
     app-score-display {
         grid-area: score-display;
+        border-top: 20px;
+        border-right: 10px;
+        border-bottom: 10px;
+        border-left: 20px;
+        border-style: solid;
+        border-color: #053B50;
+        padding: 30px;
+        border-radius: 20px 0px 0px 0px;
     }
     app-user-action-history {
         grid-area: user-action-history;
+        border-top: 10px;
+        border-right: 10px;
+        border-bottom: 20px;
+        border-left: 20px;
+        border-style: solid;
+        border-color: #053B50;
+        border-radius: 0px 0px 0px 20px;
+        padding: 30px;
     }
 }
 
