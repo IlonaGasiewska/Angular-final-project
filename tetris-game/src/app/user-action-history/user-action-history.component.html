@@ -1,4 +1,18 @@
-<h3>Historia gry:</h3>
+<h3>GAME HISTORY:</h3>
+<form action="">
+  <label for="cars">Show game actions: </label>
+  <select id="cars" name="cars">
+    <option value="all">all</option>
+    <option value="btn-left">button left</option>
+    <option value="btn-right">button right</option>
+    <option value="rotate">rotate</option>
+    <option value="down">down</option>
+    <option value="drop">drop</option>
+    <option value="rotate">pause</option>
+    <option value="rotate">start</option>
+  </select>
+  <input type="button" value="show">
+</form>
 <ul>
   <li *ngFor="let action of gameHistory">{{ action }}</li>
 </ul>
