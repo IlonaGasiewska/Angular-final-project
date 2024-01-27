@@ -17,7 +17,6 @@ export class WelcomePageComponent {
   emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
   checkInputs () {
-    this.isButtonDisabled = !(this.name && this.email);
     if (this.name === "" && this.email === "") {
       this.errorMessage = "Name and email are required";
     } else if (this.name === "") {
@@ -28,6 +27,7 @@ export class WelcomePageComponent {
       this.errorMessage = "Email is invalid";
     } else {
       this.errorMessage = "";
+      this.isButtonDisabled = false;
     }
   }
 
