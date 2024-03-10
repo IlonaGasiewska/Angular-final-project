@@ -88,6 +88,6 @@ export class TetrisPanelComponent {
   onGameOver() {
     alert('game over');
     this.timerStop();
-}
+  }
 
 }

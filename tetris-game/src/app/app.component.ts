@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GamePageComponent } from './game-page/game-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
   imports: [
     CommonModule,
     GamePageComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
