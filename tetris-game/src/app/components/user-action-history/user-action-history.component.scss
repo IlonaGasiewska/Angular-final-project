@@ -1,0 +1,26 @@
+h3{
+    font-family: "Press Start 2P";
+    text-align: center;
+}
+
+form {
+    text-align: center;
+    font-family: "Press Start 2P";
+    font-size: 12px;
+}
+
+ul {
+    list-style: none;
+    font-family: "Press Start 2P";
+    font-size: 12px;
+    height: 180px;
+    overflow-y: auto;
+    padding-top: 10px;
+    .action-time{
+        color: #5C5470;
+    }
+}
+
+label {
+    font-size: 12px;
+}

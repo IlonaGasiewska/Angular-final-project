@@ -1,0 +1,25 @@
+<h3>GAME HISTORY:</h3>
+<form>
+  <label for="actions">Show actions: </label>
+  <select id="actions" name="actions" [(ngModel)]="selectedAction">
+    <option value="All">All</option>
+    <option value="Button Left">Button Left</option>
+    <option value="Button Right">Button Right</option>
+    <option value="Rotate">Rotate</option>
+    <option value="Down">Down</option>
+    <option value="Drop">Drop</option>
+    <option value="Pause">Pause</option>
+    <option value="Start">Start</option>
+    <option value="Line Cleared">Line Cleared</option>
+  </select>
+  <label for="sorting">Sort by:
+    <input type="radio" name="sorting" id="first" [(ngModel)]="selectedSorting" value="First" checked>First
+    <input type="radio" name="sorting" id="last" [(ngModel)]="selectedSorting" value="Last">Last
+  </label>
+</form>
+<ul>
+  <li *ngFor="let action of filteredActions">
+    <p>{{ action.action }}</p>
+    <p class="action-time">{{ action.time.hours + 'H ' + action.time.minutes + 'M ' + action.time.seconds + 'S'}}</p>
+  </li>
+</ul>

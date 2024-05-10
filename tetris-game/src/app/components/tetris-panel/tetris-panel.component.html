@@ -1,0 +1,11 @@
+<tetris-core #game
+(lineCleared)="onLineCleared()" (gameOver)="onGameOver()"></tetris-core>
+
+<button (click)="game.actionStart()" (click)="timerStart()" (click)="handleButtonClick('Start Game')"><i class="fa-solid fa-play"></i></button>
+<button (click)="handleButtonClick('Pause')" (click)="game.actionStop()" (click)="timerStop()"><i class="fa-solid fa-pause"></i></button>
+<button (click)="handleButtonClick('Reset')" (click)="game.actionReset()" (click)="timerReset()"><i class="fa-solid fa-rotate-right"></i></button>
+<button (click)="handleButtonClick('Rotate')" (click)="game.actionRotate()"><i class="fa-solid fa-arrows-spin"></i></button>
+<button (click)="handleButtonClick('Button Left')" (click)="game.actionLeft()"><i class="fa-solid fa-square-caret-left"></i></button>
+<button (click)="handleButtonClick('Button Right')" (click)="game.actionRight()"><i class="fa-solid fa-square-caret-right"></i></button>
+<button (click)="handleButtonClick('Down')" (click)="game.actionDown()"><i class="fa-solid fa-square-caret-down"></i></button>
+<button (click)="handleButtonClick('Drop')" (click)="game.actionDrop()"><i class="fa-solid fa-down-long"></i></button>

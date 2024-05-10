@@ -1,24 +1,29 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GamePageComponent } from './game-page/game-page.component';
-import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { RouterOutlet } from '@angular/router';
+import { GamePageComponent } from './components/game-page/game-page.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { RouterOutlet, Router } from '@angular/router';
+import { UserService } from './services/user.service';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,
     CommonModule,
     GamePageComponent,
-    WelcomePageComponent,
-    RouterOutlet
+    WelcomePageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
 
-  welcomePageShouldbeVivible = true!;
+  public constructor(private _router: Router, private userService: UserService){
+
+  }
+
   userName = "";
   user = { name: '', email: '' };
 
@@ -26,7 +31,4 @@ export class AppComponent {
     this.user = userData;
   }
 
-  changePage() {
-    this.welcomePageShouldbeVivible = !this.welcomePageShouldbeVivible;
-  }
 }
