@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-welcome-page',
@@ -9,6 +11,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './welcome-page.component.scss'
 })
 export class WelcomePageComponent {
+
+  constructor(public userService : UserService, private router: Router ) {}
+
   name = "";
   title = 'ngTETRIS GAME';
   email = "";
@@ -31,18 +36,13 @@ export class WelcomePageComponent {
     }
   }
 
-  @Output() userDataSubmitted: EventEmitter<{ name: string, email: string }> = new EventEmitter();
-
   submit() {
     if (this.name && this.email) {
-      this.userDataSubmitted.emit({ name: this.name, email: this.email });
+      this.userService.setUserData( this.name,  this.email );
     }
   }
 
-  @Input() welcomePageShouldBeVisible: boolean = false;
-  @Output() pageChange = new EventEmitter<void>();
-
-  changePage() {
-    this.pageChange.emit();
+  changePage(){
+    this.router.navigate(['/game']);
   }
 }

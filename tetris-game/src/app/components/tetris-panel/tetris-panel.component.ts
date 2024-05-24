@@ -3,6 +3,7 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 import { TimeService } from '../../services/time.service';
 import { ScoreService } from '../../services/score.service';
 import { GameHistoryService } from '../../services/gameHistory.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -13,15 +14,24 @@ import { GameHistoryService } from '../../services/gameHistory.service';
   styleUrl: './tetris-panel.component.scss'
 })
 export class TetrisPanelComponent {
-
-  constructor(private _timeService: TimeService, private _scoreService: ScoreService, private _gameHistoryService: GameHistoryService){}
-
-  score = 0;
-  seconds = 0;
-  minutes = 0;
-  hours = 0;
-  isTimerRunning = false;
+  name: string = ""
+  token: string = "0";
+  score: number = 0;
+  seconds: number = 0;
+  minutes: number = 0;
+  hours: number = 0;
+  isTimerRunning:boolean= false;
   timerIntervalId: any;
+
+  constructor(
+    private _timeService: TimeService, 
+    private _scoreService: ScoreService, 
+    private _gameHistoryService: GameHistoryService,
+    private _userService: UserService
+  ){
+    this.name = _userService.getUserData().name
+    this.token = _userService.getUserData().token
+  }
 
   timerStart() {
     if (!this.isTimerRunning) {
@@ -67,7 +77,6 @@ export class TetrisPanelComponent {
   onLineCleared() {
     this.score += 10;
     this._scoreService.setScore(this.score);
-    console.log(this.score)
     // this.handleButtonClick("Line Cleared")
   }
 
@@ -82,5 +91,6 @@ export class TetrisPanelComponent {
   onGameOver() {
     alert('game over');
     this.timerStop();
-  }
+    this._scoreService.postScore({name: this.name, score: this.score, token: this.token}).subscribe();
+  };
 }

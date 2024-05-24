@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { ScoreService } from '../../services/score.service';
+import { IScoresListItem } from '../../services/score.service';
 
 @Component({
   selector: 'app-score-page',
@@ -10,23 +11,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './score-page.component.scss'
 })
 export class ScorePageComponent {
-  html: string= '';
+  scores: IScoresListItem[] = [];
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _scoreService: ScoreService ) { }
+
+// TODO Dodać sortiwanie i odświeżanie co 30 sec
 
   ngOnInit(): void {
-    this.fetchHTML();
-  }
-
-  fetchHTML() {
-    this._http.get('https://scores.chrum.it/tetris', { responseType: 'text' }).subscribe(
-      (response) => {
-        this.html = response;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+    this._scoreService.getScores().subscribe(
+      (data) => {
+        this.scores = data});
+  };
  
 }

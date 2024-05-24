@@ -1,5 +1,9 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
+import { TimeService } from '../time.service';
+import { ScoreService } from '../score.service';
+import { GameHistoryService } from '../history.serve';
+
 
 @Component({
   selector: 'app-tetris-panel',
@@ -9,14 +13,8 @@ import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
   styleUrl: './tetris-panel.component.scss'
 })
 export class TetrisPanelComponent {
-  @Output() lineCleared = new EventEmitter<number>();
-  @Output() updateTimer = new EventEmitter<{ seconds: number, minutes: number, hours: number }>();
-  @Input() welcomePageShouldBeVisible: boolean = false;
-  @Output() pageChange = new EventEmitter<void>();
 
-  changePage() {
-    this.pageChange.emit();
-  }
+  constructor(private timeService: TimeService, private scoreService: ScoreService, private sgameHistoryService: GameHistoryService){}
 
   score = 0;
   seconds = 0;
@@ -37,7 +35,7 @@ export class TetrisPanelComponent {
           this.minutes = 0;
           this.hours += 1;
         }
-        this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
+        this.timeService.setGameTime(this.hours, this.minutes, this.seconds)
       }, 1000);
       this.isTimerRunning = true;
     }
@@ -58,36 +56,31 @@ export class TetrisPanelComponent {
     this.score = 0;
     if (!this.isTimerRunning) {
       clearInterval(this.timerIntervalId);
-      this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
-      this.lineCleared.emit(this.score);
-
     } else {
       this.isTimerRunning = false;
       this.timerStart();
-      this.updateTimer.emit({ seconds: this.seconds, minutes: this.minutes, hours: this.hours });
-      this.lineCleared.emit(this.score);
     }
+    this.timeService.setGameTime(this.hours, this.minutes, this.seconds);
+    this.scoreService.setScore(this.score);
   }
 
   onLineCleared() {
     this.score += 10;
-    this.lineCleared.emit(this.score);
-    this.handleButtonClick("Line Cleared")
+    this.scoreService.setScore(this.score);
+    console.log(this.score)
+    // this.handleButtonClick("Line Cleared")
   }
 
-  @Output() actionClicked = new EventEmitter<string>();
-
   handleButtonClick(action: string): void {
-    if (action != "Reset"){
-      this.isTimerRunning === true && this.actionClicked.emit(action);
-    } else {
-      this.actionClicked.emit(action);
-    }
+    // if (action != "Reset"){
+    //   this.isTimerRunning === true && this.gameHistoryService.addGameAction(action)
+    // } else {
+    //   this.actionClicked.emit(action);
+    // }
   }
 
   onGameOver() {
     alert('game over');
     this.timerStop();
   }
-
 }

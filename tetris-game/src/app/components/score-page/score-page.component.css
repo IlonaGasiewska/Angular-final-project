@@ -1,0 +1,7 @@
+ul {
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

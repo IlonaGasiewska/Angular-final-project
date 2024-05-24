@@ -1,5 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ScoreService } from '../score.service';
+import { TimeService } from '../time.service';
+import { UserService } from '../user.service';
 
+interface Time {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 @Component({
   selector: 'app-score-display',
   standalone: true,
@@ -7,10 +16,31 @@ import { Component, Input } from '@angular/core';
   templateUrl: './score-display.component.html',
   styleUrl: './score-display.component.scss'
 })
-export class ScoreDisplayComponent {
-  @Input() userName: string = '';
-  @Input() seconds: number = 0;
-  @Input() minutes: number = 0;
-  @Input() hours: number = 0;
-  @Input() score: number = 0;
+
+export class ScoreDisplayComponent implements OnInit, OnDestroy {
+
+  userName: string = '';
+  seconds: number = 0;
+  minutes: number = 0;
+  hours: number = 0;
+  score: number = 0;
+  private scoreSubscription!: Subscription;
+  private timeSubscription!: Subscription;
+
+  constructor(private userService: UserService, private timeService: TimeService, private scoreService: ScoreService) { }
+
+  ngOnInit() {
+    this.userName = this.userService.getUserData().name;
+    this.scoreSubscription = this.scoreService.score$.subscribe(score => this.score = score);
+    this.timeSubscription = this.timeService.time$.subscribe((time: Time) => {
+      this.seconds = time.seconds;
+      this.minutes = time.minutes;
+      this.hours = time.hours;
+    });
+  }
+
+  ngOnDestroy() {
+    this.scoreSubscription.unsubscribe();
+    this.timeSubscription.unsubscribe();
+  }
 }

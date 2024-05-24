@@ -1,18 +1,21 @@
 <div [ngClass]="{'dark-page': selectedTheme === 'dark', 'light-page': selectedTheme === 'light'}">
     <h1>{{title}}</h1>
     <img src="../favicon.ico" alt="tetris icon">
-    <form>
+    <form [formGroup]="userForm">
       <label for="name">Name</label>
-      <input name="name" type="text" [(ngModel)]="name" (input)="handleInputsValidation()">
+      <input name="name" type="text" formControlName="name">
+      {@if(userForm.controls['name'].touched && userForm.controls['name'].invalid) {
+        <p class="error-message">Too short name</p>
+      }
       <label for="token">Token</label>
-      <input name="token" [(ngModel)]="token" (input)="handleInputsValidation()">
+      <input name="token" formControlName="token">
       <label for="theme">Theme</label>
-      <select [(ngModel)]="selectedTheme" name="theme" id="">
+      <select formControlName="selectedTheme" name="theme" id="">
         <option value="light">light</option>
         <option value="dark">dark</option>
       </select>
-      <p class="error-message">{{errorMessage}}</p>
-      <button type="button" (click)="submit()" [disabled]="isButtonDisabled">START</button>
+      
+      <button type="button" (click)="submit()">START</button>
     </form>
     <button class="btnHighscortes" (click)="goToScorePage()">See highscores</button>
   </div>
