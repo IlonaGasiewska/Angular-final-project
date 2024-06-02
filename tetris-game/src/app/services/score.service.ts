@@ -1,49 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, interval } from 'rxjs';
+import { switchMap, startWith } from 'rxjs/operators';
 
-export interface IScoresListItem{
-  name:"string",
-  score:"number"
+export interface IScoresListItem {
+  name: string;
+  score: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class ScoreService {
   public score = new BehaviorSubject<number>(0);
   private _URL = 'https://scores.chrum.it/scores/tetris';
   private _POST_SCORE_URL = 'https://scores.chrum.it/scores';
   public score$ = this.score.asObservable();
+  public scores$!: Observable<IScoresListItem[]>;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+    this.scores$ = interval(3000).pipe(
+      startWith(0),
+      switchMap(() => this.getScores())
+    );
+  }
 
   public setScore(score: number): void {
     this.score.next(score);
-  };
+  }
 
-  public getScore(): number {
-    return this.score.value;
-  };
-
-  public postScore (userData:{name:string, score:number, token: string}) {
-    const dataTosend = {
+  public postScore(userData: { name: string, score: number, token: number }) {
+    const dataToSend = {
       name: userData.name,
       game: "tetris",
       score: userData.score
     };
-    
-    return this._http.post(this._POST_SCORE_URL, dataTosend, {
-      headers: {  Accept: 'application/json', 'Auth-Token': userData.token , 'Content-Type': 'application/json'}
+    return this._http.post(this._POST_SCORE_URL, dataToSend, {
+      headers: { Accept: 'application/json', 'Auth-Token': userData.token.toString(), 'Content-Type': 'application/json' }
     });
-
-  };
+  }
 
   public getScores(): Observable<IScoresListItem[]> {
-    return this._http
-      .get<Array<IScoresListItem>>(this._URL, {
-        headers: { Accept: 'application/json' },
-      });
-    };
-};
+    return this._http.get<Array<IScoresListItem>>(this._URL, {
+      headers: { Accept: 'application/json' },
+    });
+  }
+}

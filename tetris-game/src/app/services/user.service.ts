@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 
 interface IUserData { 
   name: string, 
-  token: string 
+  token: number
 }
 
 @Injectable({
@@ -11,20 +11,20 @@ interface IUserData {
 })
 
 export class UserService {
-  public userData: IUserData  = { name: '', token: '' };
+  public userData: IUserData  = { name: '', token: 0 };
   private _POST_TOKEN_URL = 'https://scores.chrum.it/check-token';
 
   constructor(private _http: HttpClient) {}
 
   public isAuthenticated(){
-    if (this.userData.name !="" && this.userData.token !==""){
+    if (this.userData.name !="" && this.userData.token !== null){
       return true;
     } else {
       return false;
     }
   }
 
-  public setUserData(name: string, token: string) {
+  public setUserData(name: string, token: number) {
     this.userData = { name: name, token: token };
   }
 
@@ -32,9 +32,9 @@ export class UserService {
     return this.userData;
   }
 
-  public checkToken(token:string){
+  public checkToken(token:number){
     const dataTosend = {
-      'auth-token': token,
+      'auth-token': token.toString(),
     };
 
     return this._http.post(this._POST_TOKEN_URL, dataTosend, {

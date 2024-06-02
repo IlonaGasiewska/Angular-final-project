@@ -38,9 +38,13 @@
         }
         select{
             width: 100%;
+            background-color: transparent;
         }
         .error-message {
             color: #FF004D;
+            text-align: start;
+            width: 100%;
+            margin: 0;
         }
      }
 

@@ -1,85 +1,82 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-welcome-page',
   standalone: true,
   imports: [NgClass, ReactiveFormsModule],
   templateUrl: './welcome-page.component.html',
-  styleUrl: './welcome-page.component.scss'
+  styleUrls: ['./welcome-page.component.scss']
 })
-export class WelcomePageComponent {
-  selectedTheme:string= "light"
-  name: string = "";
-  title:string = 'ngTETRIS GAME';
-  token: string  = "";
-  isButtonDisabled = true;
-  errorMessage: string = "";
+export class WelcomePageComponent implements OnInit {
+  private _fb = inject(FormBuilder);
 
-  
-  public userForm = this.fb.group({
+  title: string = 'ngTETRIS GAME';
+  selectedTheme: string = "";
+
+  public userForm = this._fb.group({
     name: ['', [
       Validators.required,
-      Validators.min(5)
+      Validators.minLength(5)
     ]],
     token: ['', [
       Validators.required,
-      Validators.min(5)
+      Validators.minLength(4)
     ]],
     selectedTheme: ['light', []],
   });
 
-  constructor(public userService : UserService, private _router: Router, public fb: FormBuilder ) {
-    // this.userForm.get(['userForm', 'name'])!.valueChanges.subscribe((name) => {
-    //   if (!name) {
-    //     this.errorMessage = "Name and token are required";
-    //   }
-    // });
-  }
+  constructor(public userService: UserService, private _router: Router) { }
 
-  handleInputsValidation () {
-    if (this.name === "" && this.token === "") {
-      
-      this.isButtonDisabled = true;
-    } else if (this.name === "") {
-      this.errorMessage = "Name is required";
-      this.isButtonDisabled = true;
-    } else if (this.token === "") {
-      this.errorMessage = "Token is required";
-      this.isButtonDisabled = true;
-    } else {
-      this.errorMessage = "";
-      this.isButtonDisabled = false;
+  ngOnInit(): void {
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (user.name) {
+      this.userForm.get('name')!.setValue(user.name);
+      this.userForm.get('selectedTheme')!.setValue(user.theme);
     }
-  }
 
-  submit() {
-    if (this.name && this.token) {
-      this.checkToken();
-    };
-  };
-  
-  checkToken() {
-    this.userService.checkToken(this.token).subscribe((response: any) => {
-      if (response.success) {
-        this.userService.setUserData( this.name,  this.token );
-        this.goToGamePage();
+    if (user.theme) {
+      this.userForm.get('selectedTheme')!.setValue(user.theme);
+    }
 
-      } else {
-        this.errorMessage = "Invalid token";
-        this.isButtonDisabled = true;
-      };
+    this.selectedTheme = this.userForm.get('selectedTheme')!.value!;
+
+    this.userForm.get('selectedTheme')!.valueChanges.subscribe(value => {
+      this.selectedTheme = value!;
+      user.theme = value!;
+      localStorage.setItem('user', JSON.stringify(user));
+    });
+
+    this.userForm.get('name')!.valueChanges.subscribe(value => {
+      user.name = value!;
+      localStorage.setItem('user', JSON.stringify(user))
     });
   }
 
-  goToGamePage(){
-    this._router.navigate(['/game/', this.selectedTheme]);
+  public onSubmit(): void {
+    this.checkToken();
   }
 
-  goToScorePage(){
-    this._router.navigate(['/scores']);
+  checkToken() {
+    this.userService.checkToken(+this.userForm.value.token!).subscribe((response: any) => {
+      if (response.success) {
+        this.userService.setUserData(this.userForm.value.name!, +this.userForm.value.token!);
+        this.goToGamePage();
+      } else {
+        this.userForm.get('token')?.setErrors({ invalid: 'Invalid token' });
+      }
+    });
+  }
+
+  goToGamePage() {
+    this._router.navigate(['/game/', this.userForm.value.selectedTheme!]);
+  }
+
+  goToScorePage() {
+    this._router.navigate(['/scores', this.userForm.value.selectedTheme!]);
   }
 }

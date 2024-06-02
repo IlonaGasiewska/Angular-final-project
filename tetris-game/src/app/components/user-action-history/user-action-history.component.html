@@ -1,7 +1,7 @@
 <h3>GAME HISTORY:</h3>
-<form>
-  <label for="actions">Show actions: </label>
-  <select id="actions" name="actions" [(ngModel)]="selectedAction">
+<form [formGroup]="userActionForm">
+  <label for="selectedAction">Show actions: </label>
+  <select id="selectedAction" name="selectedAction" formControlName="selectedAction">
     <option value="All">All</option>
     <option value="Button Left">Button Left</option>
     <option value="Button Right">Button Right</option>
@@ -12,9 +12,9 @@
     <option value="Start">Start</option>
     <option value="Line Cleared">Line Cleared</option>
   </select>
-  <label for="sorting">Sort by:
-    <input type="radio" name="sorting" id="first" [(ngModel)]="selectedSorting" value="First" checked>First
-    <input type="radio" name="sorting" id="last" [(ngModel)]="selectedSorting" value="Last">Last
+  <label for="selectedSorting">Sort by:
+    <input type="radio" name="selectedSorting" id="first" formControlName="selectedSorting" value="First" checked>First
+    <input type="radio" name="selectedSorting" id="last" formControlName="selectedSorting" value="Last">Last
   </label>
 </form>
 <ul>

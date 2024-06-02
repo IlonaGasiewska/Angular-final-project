@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TetrisCoreComponent, TetrisCoreModule } from 'ngx-tetris';
 import { TimeService } from '../../services/time.service';
 import { ScoreService } from '../../services/score.service';
@@ -15,7 +15,7 @@ import { UserService } from '../../services/user.service';
 })
 export class TetrisPanelComponent {
   name: string = ""
-  token: string = "0";
+  token: number = 0 ;
   score: number = 0;
   seconds: number = 0;
   minutes: number = 0;
@@ -29,8 +29,11 @@ export class TetrisPanelComponent {
     private _gameHistoryService: GameHistoryService,
     private _userService: UserService
   ){
-    this.name = _userService.getUserData().name
-    this.token = _userService.getUserData().token
+    this.name = _userService.getUserData().name;
+    this.token = _userService.getUserData().token;
+    this._timeService.clearTime();
+    this._gameHistoryService.clearAction();
+    this._scoreService.setScore(0);
   }
 
   timerStart() {
@@ -77,20 +80,21 @@ export class TetrisPanelComponent {
   onLineCleared() {
     this.score += 10;
     this._scoreService.setScore(this.score);
-    // this.handleButtonClick("Line Cleared")
+    this.handleButtonClick("Line Cleared")
   }
 
   handleButtonClick(action: string): void {
-    // if (action != "Reset"){
-    //   this.isTimerRunning === true && this.gameHistoryService.addGameAction(action)
-    // } else {
-    //   this.actionClicked.emit(action);
-    // }
+    this._gameHistoryService.addGameAction({ action: action, time: { seconds: this.seconds, minutes: this.minutes, hours: this.hours }})
   }
 
   onGameOver() {
-    alert('game over');
-    this.timerStop();
-    this._scoreService.postScore({name: this.name, score: this.score, token: this.token}).subscribe();
+    if(this.score === 0){
+      this.timerStop();
+      alert(`Game over, your score is : ${this.score}`);
+    } else {
+      alert(`Game over, your score is : ${this.score}`);
+      this.timerStop();
+      this._scoreService.postScore({name: this.name, score: this.score, token: this.token}).subscribe();
+    }
   };
 }

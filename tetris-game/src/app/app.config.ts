@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter([
       {path:'welcome', component: WelcomePageComponent },
       {path:'game/:theme', component: GamePageComponent, canActivate: [playerDataGuard] },
-      {path:'scores', component: ScorePageComponent },
+      {path:'scores/:theme', component: ScorePageComponent },
       {path: '**', redirectTo: 'welcome'}
     ]),
     provideHttpClient(),

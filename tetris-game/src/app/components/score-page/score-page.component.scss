@@ -1,7 +1,52 @@
-ul {
-    background-color: #FFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.light-page, .dark-page  {
+  width: 60%;
+  min-width: 350px;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  padding: 50px;
+  border-radius: 20px;
+  font-family: "Press Start 2P";
 }
+
+.light-page {
+  background-color: #FFF;
+}
+
+.dark-page {
+  background-color: #5C5470;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+  }
+  
+  .grid-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .name {
+    margin-right: 10px;
+  }
+  
+  .score {
+    margin-left: auto;
+  }
+  
+  .btn-back-to-menu {
+    height: fit-content;
+    font-size: 17px;
+    border: none;
+    background-color: transparent;
+    font-family: "Press Start 2P";
+    cursor: pointer;
+    text-align: end;
+    margin-top: 50px;
+}
+    

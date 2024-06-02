@@ -18,11 +18,11 @@ export class TimeService {
 
   constructor() {}
 
-  public getGameTime(): { hours: number, minutes: number, seconds: number } {
-    return this._gameTime.value;
-  };
-
   public setGameTime(hours: number, minutes: number, seconds: number): void {
     this._gameTime.next({ hours, minutes, seconds });
   };
+
+  public clearTime = (): void => {
+    this._gameTime.next({ hours:0, minutes:0, seconds:0 });
+  }
 };

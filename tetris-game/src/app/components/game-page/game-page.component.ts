@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { TetrisPanelComponent } from '../tetris-panel/tetris-panel.component';
 import { ScoreDisplayComponent } from '../score-display/score-display.component';
 import { UserActionHistoryComponent } from '../user-action-history/user-action-history.component';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { NgClass } from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-game-page',
